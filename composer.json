@@ -1,0 +1,8 @@
+{
+    "scripts": {
+        "setup": [
+            "php backend/migrate.php",
+            "php backend/seed.php"
+        ]
+    }
+}
