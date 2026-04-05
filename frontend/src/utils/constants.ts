@@ -6,9 +6,14 @@ import type { ZoneStatus, ZoneType } from '@/types/zone'
    Use the appropriate endpoint for your environment.
    Uncomment the XAMPP backend URL if needed.
 ────────────────────────────────────────────────────────────── */
-// export const API_BASE = 'http://localhost/claudePark/backend'
-export const API_BASE = 'http://localhost:8080' // Default Docker backend
 
+//  Automatically select backend URL based on environment (local vs production)
+export const API_BASE =
+  window.location.hostname === 'http://localhost/claudePark/backend'
+    ? 'http://localhost:8080'
+    : 'http://51.20.73.130:8080';
+
+  
 /* ──────────────────────────────────────────────────────────────
    Zone Status Metadata
    ──────────────────────────────────────────────────────────────
