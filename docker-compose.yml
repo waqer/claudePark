@@ -56,7 +56,7 @@ services:
       DB_NAME: parkman
       DB_USER: root
       DB_PASS: secret
-    command: bash -c "php migrate.php && php seed.php"
+    command: bash -c "php backend/migrate.php && php backend/seed.php"
     restart: "no"
 
   # ── Vue 3 Frontend ────────────────────────────────────────────────────────
