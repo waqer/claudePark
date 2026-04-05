@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+define('API_BASE_URL', 'http://localhost/claudePark/backend/api'); // Change base url as per needed
+
 define('DB_HOST', 'localhost');
 define('DB_PORT', '3306');
 define('DB_NAME', 'parkman');
