@@ -1,7 +1,12 @@
 Options -Indexes
 RewriteEngine On
-RewriteBase /claudePark/backend/
+
+# ── Docker: app runs at document root, no subfolder ──────────────────────────
+# RewriteBase is intentionally omitted — works for both Docker (root)
+# and XAMPP subfolder because we strip the prefix in index.php instead.
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.php [QSA,L]
+
+# Route all /api/* requests through index.php
+RewriteRule ^api/(.*)$ index.php [QSA,L]

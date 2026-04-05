@@ -1,0 +1,29 @@
+{
+    "name": "parkman/zone-viewer",
+    "description": "Parking Zone Viewer — PHP backend + Vue 3 frontend",
+    "require": {
+        "php": ">=8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "setup": [
+            "php migrate.php",
+            "php seed.php"
+        ],
+        "test": [
+            "./vendor/bin/phpunit tests/ --testdox"
+        ]
+    },
+    "scripts-descriptions": {
+        "setup": "Create the database table and seed 10 Helsinki parking zones",
+        "test": "Run PHPUnit backend tests",
+        "reset": "Re-run migration and seed (safe to run multiple times)"
+    }
+}
