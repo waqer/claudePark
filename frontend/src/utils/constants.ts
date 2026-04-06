@@ -12,7 +12,7 @@ const isLocal = window.location.hostname === 'localhost' || window.location.host
 
 export const API_BASE = isLocal
   ? 'http://localhost:8080'
-  : 'http://51.20.137.195:8080';
+  : 'http://51.20.125.185:8080';
 
   
 /* ──────────────────────────────────────────────────────────────
