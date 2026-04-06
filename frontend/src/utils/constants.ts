@@ -6,12 +6,13 @@ import type { ZoneStatus, ZoneType } from '@/types/zone'
    Use the appropriate endpoint for your environment.
    Uncomment the XAMPP backend URL if needed.
 ────────────────────────────────────────────────────────────── */
-
+//'http://localhost/claudePark/backend'
 //  Automatically select backend URL based on environment (local vs production)
-export const API_BASE =
-  window.location.hostname === 'http://localhost/claudePark/backend'
-    ? 'http://localhost:8080'
-    : 'http://51.20.137.195:8080';
+const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+export const API_BASE = isLocal
+  ? 'http://localhost:8080'
+  : 'http://51.20.137.195:8080';
 
   
 /* ──────────────────────────────────────────────────────────────

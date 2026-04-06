@@ -5,7 +5,7 @@ services:
   # ── MySQL Database ────────────────────────────────────────────────────────
   db:
     image: mysql:8.0
-    container_name: parkman
+    container_name: parkman_db
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: parkman
@@ -22,6 +22,11 @@ services:
       retries: 10
 
   # ── PHP Backend ───────────────────────────────────────────────────────────
+  # entrypoint.sh automatically:
+  #   1. Waits for MySQL to be ready
+  #   2. Runs migrate.php
+  #   3. Runs seed.php
+  #   4. Starts Apache
   backend:
     build:
       context: ./backend
@@ -40,24 +45,6 @@ services:
       DB_USER: root
       DB_PASS: secret
       API_BASE_URL: http://localhost:8080/api
-
-  # ── Database setup (runs once then exits) ─────────────────────────────────
-  setup:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: parkman_setup
-    depends_on:
-      db:
-        condition: service_healthy
-    environment:
-      DB_HOST: db
-      DB_PORT: 3306
-      DB_NAME: parkman
-      DB_USER: root
-      DB_PASS: secret
-    command: bash -c "php backend/migrate.php && php backend/seed.php"
-    restart: "no"
 
   # ── Vue 3 Frontend ────────────────────────────────────────────────────────
   frontend:
