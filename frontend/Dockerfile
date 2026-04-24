@@ -1,19 +1,15 @@
-FROM node:20-alpine
+FROM node:22-alpine
 
 WORKDIR /app
 
-# Copy package files first and install — this layer is cached
+# Install dependencies first (better layer caching)
 COPY package*.json ./
 RUN npm install
 
-# Copy source code
+# Copy the rest of the source
 COPY . .
 
-# Expose Vite dev port
 EXPOSE 5173
 
-# Fix Vite permissions
-RUN chmod +x ./node_modules/.bin/vite
-
-# Run Vite on all interfaces so it's reachable outside the container
-CMD ["npx", "vite", "--host", "0.0.0.0", "--port", "5173"]
+# Call vite directly from node_modules
+CMD ["node_modules/.bin/vite", "--host", "0.0.0.0"]

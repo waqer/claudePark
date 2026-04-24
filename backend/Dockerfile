@@ -19,11 +19,12 @@ WORKDIR /var/www/html
 # Copy all backend files
 COPY . .
 
+# Fix Windows CRLF line endings → Unix LF, then make executable
+RUN sed -i 's/\r//' /var/www/html/entrypoint.sh && \
+    chmod +x /var/www/html/entrypoint.sh
+
 # Install PHP dependencies (PHPUnit etc)
 RUN composer install --no-interaction --prefer-dist
-
-# Make entrypoint executable
-RUN chmod +x /var/www/html/entrypoint.sh
 
 EXPOSE 80
 
