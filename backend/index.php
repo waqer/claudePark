@@ -29,8 +29,8 @@ require_once __DIR__ . '/routes.php';
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = rtrim($uri, '/');
 
-// Strip subfolder prefix so the router works under any document root path
-// e.g. /claudePark/backend/api/zones → /api/zones
+// Strip subfolder prefix so the router works on any document root path
+// e.g. /backend/api/zones → /api/zones
 $scriptDir = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
 if ($scriptDir !== '' && str_starts_with($uri, $scriptDir)) {
     $uri = substr($uri, strlen($scriptDir));
